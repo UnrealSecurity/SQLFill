@@ -1,4 +1,5 @@
-Example 1
+## Example 1
+Code:
 ```php
 <?php
 
@@ -13,8 +14,13 @@ Example 1
 
 ?>
 ```
+SQL query:
+```sql
+SELECT * FROM offices
+```
 
-Example 2
+## Example 2
+Code:
 ```php
 <?php
 
@@ -31,4 +37,8 @@ Example 2
     $result = $sql->fill('INSERT INTO $ $ VALUES ?', $table, $fields, $values)->query(); /* --> SQLFillResult */
 
 ?>
+```
+SQL query:
+```sql
+INSERT INTO Customers (CustomerName,ContactName,Address,City,PostalCode,Country) VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'),('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway')
 ```
