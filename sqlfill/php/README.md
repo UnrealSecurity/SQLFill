@@ -4,28 +4,7 @@ Code:
 <?php
 
     require_once 'sqlfill/php/sqlfill.php';
-    $sql = new SQLFill($host, $user, $pass, $dbname, $port);
-
-    $result = $sql->fill('SELECT * FROM $', 'offices')->query(); /* --> SQLFillResult */
-    while ($row = $result->fetch()) {
-        $name = $row['Name'];
-        echo "$name<br />";
-    }
-
-?>
-```
-SQL query:
-```sql
-SELECT * FROM offices
-```
-
-## Example 2
-Code:
-```php
-<?php
-
-    require_once 'sqlfill/php/sqlfill.php';
-    $sql = new SQLFill($host, $user, $pass, $dbname);
+    $sql = new SQLFill($host, $user, $pass, $dbname, $port = 3306);
 
     $table  = 'Customers';
     $fields = ['CustomerName', 'ContactName', 'Address', 'City', 'PostalCode', 'Country'];
@@ -43,13 +22,13 @@ SQL query:
 INSERT INTO Customers (CustomerName,ContactName,Address,City,PostalCode,Country) VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'),('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway')
 ```
 
-## Example 3
+## Example 2
 Code:
 ```php
 <?php
 
     require_once 'sqlfill/php/sqlfill.php';
-    $sql = new SQLFill($host, $user, $pass, $dbname);
+    $sql = new SQLFill($host, $user, $pass, $dbname, $port = 3306);
 
     $result = $sql->fill('SELECT & FROM $ WHERE Country = ?', 
         ['FirstName', 'LastName'], 'Customers', 'FI')->query(); /* --> SQLFillResult */
