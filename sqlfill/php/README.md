@@ -51,12 +51,12 @@ Code:
     require_once 'sqlfill/php/sqlfill.php';
     $sql = new SQLFill($host, $user, $pass, $dbname);
 
-    $result = $sql->fill('SELECT & FROM $', 
-        ['FirstName', 'LastName'], 'Customers')->query(); /* --> SQLFillResult */
+    $result = $sql->fill('SELECT & FROM $ WHERE Country = ?', 
+        ['FirstName', 'LastName'], 'Customers', 'FI')->query(); /* --> SQLFillResult */
 
 ?>
 ```
 SQL query:
 ```sql
-SELECT FirstName, LastName FROM Customers
+SELECT FirstName, LastName FROM Customers WHERE Country = 'FI'
 ```
