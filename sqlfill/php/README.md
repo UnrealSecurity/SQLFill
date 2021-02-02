@@ -2,14 +2,7 @@
 <?php
 
     require_once 'sqlfill/php/sqlfill.php';
-
-    $host   = '127.0.0.1';
-    /* $port   = 3360; */
-    $user   = 'root';
-    $pass   = 'veryWeakPassword123';
-    $dbname = 'MyDatabase';
-
-    $sql = new SQLFill($host, $user, $pass, $dbname, /* $port */);
+    $sql = new SQLFill($host, $user, $pass, $dbname, $port);
 
     $result = $sql->fill('SELECT * FROM $', 'offices')->query(); /* --> SQLFillResult */
     while ($row = $result->fetch()) {
@@ -23,6 +16,7 @@
 ```php
 <?php
 
+    require_once 'sqlfill/php/sqlfill.php';
     $sql = new SQLFill($host, $user, $pass, $dbname);
 
     $table  = 'Customers';
