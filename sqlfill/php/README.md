@@ -1,3 +1,4 @@
+Example 1
 ```php
 <?php
 
@@ -13,6 +14,7 @@
 ?>
 ```
 
+Example 2
 ```php
 <?php
 
