@@ -17,7 +17,25 @@
 
             $j = 0;
             for ($i = 0; $i < count($array); $i++) {
-                if ($array[$i] === '?') {
+                if ($array[$i] === '&') {
+                    $value = $data[$j++];
+                    $d = SQLFill::get_array_d($value);
+                    if ($d === 0) {
+                        if (!SQLFill::is_valid_field_name($value)) {
+                            throw new Exception($this::$strings[0].$this::$strings[1]);
+                        }
+                        $array[$i] = SQLFill::escape($value, false);
+                    } else if ($d === 1) {
+                        $select = [];
+                        foreach ($value as $v) {
+                            if (!SQLFill::is_valid_field_name($v)) {
+                                throw new Exception($this::$strings[0].$this::$strings[1]);
+                            }
+                            $select[] = SQLFill::escape($v, false);
+                        }
+                        $array[$i] = implode(',', $select);
+                    }
+                } else if ($array[$i] === '?') {
                     $value = $data[$j++];
                     $d = SQLFill::get_array_d($value);
 
