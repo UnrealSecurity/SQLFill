@@ -42,3 +42,21 @@ SQL query:
 ```sql
 INSERT INTO Customers (CustomerName,ContactName,Address,City,PostalCode,Country) VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway'),('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway')
 ```
+
+## Example 3
+Code:
+```php
+<?php
+
+    require_once 'sqlfill/php/sqlfill.php';
+    $sql = new SQLFill($host, $user, $pass, $dbname);
+
+    $result = $sql->fill('SELECT & FROM $', 
+        ['FirstName', 'LastName'], 'Customers')->query(); /* --> SQLFillResult */
+
+?>
+```
+SQL query:
+```sql
+SELECT FirstName, LastName FROM Customers
+```
