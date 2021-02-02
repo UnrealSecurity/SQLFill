@@ -4,12 +4,15 @@
 
     class SQLFill {
         function __construct($host, $user, $pass, $dbname, $port = 3306) {
-            try {
-                $this->queries = [];
-                $this->mysqli = new mysqli($host, $user, $pass, $dbname, $port);
-            } catch (Exception $err) {
-                
+            $this->queries = [];
+            $this->mysqli = new mysqli($host, $user, $pass, $dbname, $port);
+        }
+
+        function nofill($query) {
+            if (!is_string($query)) {
+                throw new Exception($this::$strings[0].$this::$strings[2]);
             }
+            $this->queries[] = $query;
         }
 
         function fill($template, ...$data) {
@@ -128,7 +131,8 @@
 
         public static $strings = [
             'SQLFill: ',
-            'Failed to fill database query!'
+            'Failed to fill database query!',
+            'Refused to execute database query!'
         ];
     }
 
