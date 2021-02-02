@@ -13,6 +13,7 @@
                 throw new Exception($this::$strings[0].$this::$strings[2]);
             }
             $this->queries[] = $query;
+            return $this;
         }
 
         function fill($template, ...$data) {
