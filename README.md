@@ -11,3 +11,6 @@ SQLFill prevents SQL injection attacks by properly escaping user input. You basi
 | ? 	| `'a'` 	| `'a'` 	|
 |  	| `['a', 'b']` 	| `('a', 'b')` 	|
 |  	| `[['a', 'b'], ['a', 'b']]` 	| `('a', 'b'), ('a', 'b')` 	|
+
+## Keywords that will not be affected
+`TRUE`, `FALSE`
