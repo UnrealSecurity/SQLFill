@@ -100,7 +100,12 @@
         }
 
         static function escape($str, $quotes = true) {
-            $str = strval($str);
+            if (is_bool($str)) {
+                $str = $str ? 'TRUE' : 'FALSE';
+                return $str;
+            } else {
+                $str = strval($str);
+            }
 
             if (in_array($str, SQLFill::$keywords, true)) {
                 return $str;
