@@ -96,7 +96,7 @@
         function query() {
             $query = $this->tostr();
             $this->flush();
-            return new SQLFillResult($this, $this->mysqli->query($query));
+            return new SQLFillResult($this, $this->mysqli->query($query), $this->mysqli->errno !== 0);
         }
 
         static function escape($str, $quotes = true) {
@@ -156,9 +156,10 @@
     }
 
     class SQLFillResult {
-        function __construct($sqlfill, $result) {
+        function __construct($sqlfill, $result, $is_error = false) {
             $this->sqlfill = $sqlfill;
             $this->result = $result;
+            $this->error = $is_error;
         }
 
         function fetch() {
