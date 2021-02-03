@@ -24,16 +24,17 @@
                 if ($array[$i] === '&') {
                     $value = $data[$j++];
                     $d = SQLFill::get_array_d($value);
+
                     if ($d === 0) {
                         if (!SQLFill::is_valid_field_name($value)) {
-                            throw new Exception($this::$strings[0].$this::$strings[1]);
+                            throw new Exception(SQLFill::$strings[0].SQLFill::$strings[1]);
                         }
                         $array[$i] = SQLFill::escape($value, false);
                     } else if ($d === 1) {
                         $select = [];
-                        foreach ($value as $v) {
+                        foreach ($value as &$v) {
                             if (!SQLFill::is_valid_field_name($v)) {
-                                throw new Exception($this::$strings[0].$this::$strings[1]);
+                                throw new Exception(SQLFill::$strings[0].SQLFill::$strings[1]);
                             }
                             $select[] = SQLFill::escape($v, false);
                         }
@@ -44,6 +45,7 @@
                     $d = SQLFill::get_array_d($value);
 
                     if ($d === 0) {
+                        $value = strval($value);
                         $array[$i] = SQLFill::escape($value);
                     } else if ($d === 1) {
                         $array[$i] = SQLFill::escape_array($value);
@@ -98,6 +100,12 @@
         }
 
         static function escape($str, $quotes = true) {
+            $str = strval($str);
+
+            if (in_array($str, SQLFill::$keywords, true)) {
+                return $str;
+            }
+
             $str = str_replace('\'', '\\\'', $str);
             return $quotes ? "'".$str."'" : $str;
         }
@@ -117,6 +125,7 @@
         }
 
         static function is_valid_field_name($name) {
+            $name = strval($name);
             return preg_match('/^.[A-z0-9_\.\(\)]*$/', $name) === 1;
         }
 
@@ -134,6 +143,10 @@
             'SQLFill: ',
             'Failed to fill database query!',
             'Refused to execute database query!'
+        ];
+
+        public static $keywords = [
+            'TRUE', 'FALSE'
         ];
     }
 
