@@ -1,5 +1,6 @@
 *Hey you! If you're reading this you should definitely not use this.*
 *Use this instead if it suits your needs [Luxon Framework](https://github.com/UnrealSecurity/luxon-framework)*
+*Luxon Framework has SQLFill's functionality with Database::template($template, ...$data)*
 
 
 # SQLFill
